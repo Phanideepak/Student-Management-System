@@ -1,0 +1,16 @@
+ ***HOW TO SOLVE SPRING PROBLEMS ***
+ 
+ 1.) Place html files inside src/main/resources/templates folder. Don't use @ResponseBody while returning html page in controller.
+ 2.)Spring boot default finds html files inside src/main/resources/templates folder.
+ 
+ 3.)ThyLeaf provides forloop iterator for html code.
+ 
+ 
+/** This code is added to controller such that string to date conversion is handled by thyme leaf. 
+    
+ @InitBinder
+public void initBinder(WebDataBinder binder) {
+    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("MM/dd/yyyy"), true));
+}
+**/
+ 
