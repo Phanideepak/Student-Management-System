@@ -25,4 +25,18 @@ public class StudentService {
 		student.setId(count);
 		studentRepo.save(student);
 	}
+	
+	public Student getStudentById(Long id)
+	{
+		
+		return studentRepo.findById(id).get();
+	}
+	public void updateStudent(Student student)
+	{
+		studentRepo.save(student);
+	}
+	public void deleteStudentById(long id)
+	{
+		studentRepo.deleteById(id);
+	}
 }

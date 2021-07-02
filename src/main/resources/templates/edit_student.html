@@ -30,9 +30,9 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
  <br><br>
        <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-centre card">
-             <h1 style="text-align:centre;">Create New Student</h1>
+             <h1 style="text-align:centre;">Update Student</h1>
              <div class="card-body">
-                <form th:action="@{/students}" th:object="${student}" method="POST">
+                <form th:action="@{/students/{id}(id=${student.id})}" th:object="${student}" method="POST">
                   <div class="form-group">
                     <label>Student First Name</label>
                     <input

@@ -12,7 +12,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +62,42 @@ public class StudentController {
 		// redirect to students.html page
 		return "redirect:/students";
 	}
+	
+	// create update student page..
+	@GetMapping("/students/edit/{id}")
+	public String createEditStudentPage(@PathVariable long id, Model model)
+	{
+		model.addAttribute("student", studentService.getStudentById(id));
+		return "edit_student"; 
+		
+	}
+	
+	//Update the student details.
+	@PostMapping("/students/{id}")
+	public String updateStudentDetails(@PathVariable long id,@ModelAttribute("student") Student student)
+	{
+		Student existingStudent=studentService.getStudentById(id);
+		existingStudent.setId(id);
+		existingStudent.setEmail(student.getEmail());
+		existingStudent.setFirstName(student.getFirstName());
+		existingStudent.setLastName(student.getLastName());
+		existingStudent.setBirthdate(student.getBirthdate());
+		
+		studentService.updateStudent(existingStudent);
+		return "redirect:/students";
+	}
+	
+	//Delete student by Id
+	@GetMapping("/students/{id}")
+	public String deleteStudent(@PathVariable long id)
+	{
+		studentService.deleteStudentById(id);
+		return "redirect:/students";
+	}
+	
+	
+	
+	// It resolves the String to Date conversion in thyme-leaf
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
